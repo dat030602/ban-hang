@@ -1,0 +1,71 @@
+@import '../../../../components/GlobalStyles/GlobalStyles.module.scss';
+
+.description {
+    height: 300px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    max-height: 300px;
+    overflow: hidden;
+    margin: 0 32px;
+}
+
+.description-img {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    min-height: 200px;
+    max-height: 300px;
+}
+
+.description-content {
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: var(--text-color);
+    padding: 0 72px;
+}
+
+.description-title {
+    font-size: 2rem;
+    line-height: 2.6rem;
+}
+
+.description-note {
+    margin: 16px 0;
+    font-size: 1.6rem;
+    line-height: 2rem;
+}
+
+.description-note p {
+    margin: 4px 0;
+    text-align: justify;
+}
+
+.description-more {
+    text-align: center;
+}
+
+.description-more button {
+    color: var(--white-color);
+    font-size: 1.6rem;
+    font-weight: 500;
+}
+
+.services {
+    margin: 32px;
+    padding: 24px;
+    background-color: #f2f2f2;
+    font-size: 1.9rem;
+    font-weight: 450;
+    line-height: 6rem;
+    width: 100%;
+    color: var(--text-color);
+    display: flex;
+    justify-content: space-between;
+}
+
+.services-label {
+    margin: 0 32px;
+}

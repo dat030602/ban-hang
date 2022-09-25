@@ -1,0 +1,50 @@
+@import '../../../../components/GlobalStyles/GlobalStyles.module.scss';
+
+.control {
+    background-color: var(--primary-color);
+    height: 56px;
+}
+
+.control--flex {
+    display: flex;
+    justify-content: space-between;
+}
+
+.control-link {
+    width: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 56px;
+}
+
+.control-label.control--active {
+    opacity: 1;
+}
+
+.control-label {
+    color: var(--white-color);
+    font-size: 1.6rem;
+    opacity: 0.8;
+    font-weight: 450;
+}
+
+.control-label:hover {
+    opacity: 1;
+    color: var(--white-color);
+}
+
+.control-label+.control-label {
+    margin-left: 16px;
+}
+
+.control-contact {
+    display: flex;
+    align-items: center;
+    width: auto;
+}
+
+.control-contact-img {
+    max-width: 138px;
+    max-height: 70%;
+}
