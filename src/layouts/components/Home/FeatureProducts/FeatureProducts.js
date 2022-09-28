@@ -22,7 +22,7 @@ function FeatureProducts() {
                                     className={cx('product-item-img', 'fix-img-75')}
                                     style={{
                                         backgroundImage:
-                                            "url('https://dosi-in.com/file/detailed/392/dosiin-mende-mende-logo-vshirt-trangao-so-mi-nam-tay-ngan-392745392745.jpg?w=1000&h=1000&fit=fill&fm=webp')",
+                                            "url('https://firebasestorage.googleapis.com/v0/b/ban-hang-a8c40.appspot.com/o/img%2Fthe-thong-minh%2Fmau4.png?alt=media&token=0f0487c4-21b1-4b8a-bfdc-2954706ad9e1')",
                                     }}
                                 ></div>
                                 <div className={cx("product-info")}>
@@ -41,7 +41,7 @@ function FeatureProducts() {
                                     className={cx('product-item-img', 'fix-img-75')}
                                     style={{
                                         backgroundImage:
-                                            "url('https://dosi-in.com/file/detailed/392/dosiin-mende-mende-logo-vshirt-trangao-so-mi-nam-tay-ngan-392745392745.jpg?w=1000&h=1000&fit=fill&fm=webp')",
+                                            "url('https://firebasestorage.googleapis.com/v0/b/ban-hang-a8c40.appspot.com/o/img%2Fthe-thong-minh%2Fmau4.png?alt=media&token=0f0487c4-21b1-4b8a-bfdc-2954706ad9e1')",
                                     }}
                                 ></div>
                                 <div className={cx("product-info")}>
@@ -60,7 +60,7 @@ function FeatureProducts() {
                                     className={cx('product-item-img', 'fix-img-75')}
                                     style={{
                                         backgroundImage:
-                                            "url('https://dosi-in.com/file/detailed/392/dosiin-mende-mende-logo-vshirt-trangao-so-mi-nam-tay-ngan-392745392745.jpg?w=1000&h=1000&fit=fill&fm=webp')",
+                                            "url('https://firebasestorage.googleapis.com/v0/b/ban-hang-a8c40.appspot.com/o/img%2Fthe-thong-minh%2Fmau4.png?alt=media&token=0f0487c4-21b1-4b8a-bfdc-2954706ad9e1')",
                                     }}
                                 ></div>
                                 <div className={cx("product-info")}>
@@ -79,7 +79,7 @@ function FeatureProducts() {
                                     className={cx('product-item-img', 'fix-img-75')}
                                     style={{
                                         backgroundImage:
-                                            "url('https://dosi-in.com/file/detailed/392/dosiin-mende-mende-logo-vshirt-trangao-so-mi-nam-tay-ngan-392745392745.jpg?w=1000&h=1000&fit=fill&fm=webp')",
+                                            "url('https://firebasestorage.googleapis.com/v0/b/ban-hang-a8c40.appspot.com/o/img%2Fthe-thong-minh%2Fmau4.png?alt=media&token=0f0487c4-21b1-4b8a-bfdc-2954706ad9e1')",
                                     }}
                                 ></div>
                                 <div className={cx("product-info")}>
@@ -98,7 +98,7 @@ function FeatureProducts() {
                                     className={cx('product-item-img', 'fix-img-75')}
                                     style={{
                                         backgroundImage:
-                                            "url('https://dosi-in.com/file/detailed/392/dosiin-mende-mende-logo-vshirt-trangao-so-mi-nam-tay-ngan-392745392745.jpg?w=1000&h=1000&fit=fill&fm=webp')",
+                                            "url('https://firebasestorage.googleapis.com/v0/b/ban-hang-a8c40.appspot.com/o/img%2Fthe-thong-minh%2Fmau4.png?alt=media&token=0f0487c4-21b1-4b8a-bfdc-2954706ad9e1')",
                                     }}
                                 ></div>
                                 <div className={cx("product-info")}>
@@ -117,7 +117,7 @@ function FeatureProducts() {
                                     className={cx('product-item-img', 'fix-img-75')}
                                     style={{
                                         backgroundImage:
-                                            "url('https://dosi-in.com/file/detailed/392/dosiin-mende-mende-logo-vshirt-trangao-so-mi-nam-tay-ngan-392745392745.jpg?w=1000&h=1000&fit=fill&fm=webp')",
+                                            "url('https://firebasestorage.googleapis.com/v0/b/ban-hang-a8c40.appspot.com/o/img%2Fthe-thong-minh%2Fmau4.png?alt=media&token=0f0487c4-21b1-4b8a-bfdc-2954706ad9e1')",
                                     }}
                                 ></div>
                                 <div className={cx("product-info")}>
@@ -136,7 +136,7 @@ function FeatureProducts() {
                                     className={cx('product-item-img', 'fix-img-75')}
                                     style={{
                                         backgroundImage:
-                                            "url('https://dosi-in.com/file/detailed/392/dosiin-mende-mende-logo-vshirt-trangao-so-mi-nam-tay-ngan-392745392745.jpg?w=1000&h=1000&fit=fill&fm=webp')",
+                                            "url('https://firebasestorage.googleapis.com/v0/b/ban-hang-a8c40.appspot.com/o/img%2Fthe-thong-minh%2Fmau4.png?alt=media&token=0f0487c4-21b1-4b8a-bfdc-2954706ad9e1')",
                                     }}
                                 ></div>
                                 <div className={cx("product-info")}>
@@ -155,7 +155,7 @@ function FeatureProducts() {
                                     className={cx('product-item-img', 'fix-img-75')}
                                     style={{
                                         backgroundImage:
-                                            "url('https://dosi-in.com/file/detailed/392/dosiin-mende-mende-logo-vshirt-trangao-so-mi-nam-tay-ngan-392745392745.jpg?w=1000&h=1000&fit=fill&fm=webp')",
+                                            "url('https://firebasestorage.googleapis.com/v0/b/ban-hang-a8c40.appspot.com/o/img%2Fthe-thong-minh%2Fmau4.png?alt=media&token=0f0487c4-21b1-4b8a-bfdc-2954706ad9e1')",
                                     }}
                                 ></div>
                                 <div className={cx("product-info")}>

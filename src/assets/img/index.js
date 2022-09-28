@@ -8,5 +8,7 @@ const images = {
     close: require('~/assets/img/close.svg').default,
     starWhite: require('~/assets/img/starWhite.svg').default,
     starYellow: require('~/assets/img/starYellow.svg').default,
+    rightArrow: require('~/assets/img/right.svg').default,
+    leftArrow: require('~/assets/img/left.svg').default,
 };
 export default images;

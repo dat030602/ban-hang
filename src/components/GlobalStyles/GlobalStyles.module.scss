@@ -102,6 +102,10 @@ a{
 	margin-left: 2px;
 }
 
+.distance{
+    margin-top: 189px;
+}
+
 .distance-16 {
 	padding-top: 16px;
 }
@@ -229,6 +233,64 @@ a{
 
 /* Animation */
 
-input[type="number"]::-webkit-inner-spin-button {
-	-webkit-appearance: none;
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes moveY {
+    from {
+        opacity: 0.5;
+        transform: translateY(var(--animation-y-start));
+    }
+    to {
+        opacity: 1;
+        transform: translateY(var(--animation-y-last));
+    }
+}
+
+@keyframes moveTOP {
+    from {
+        top: var(--animation-y-start);
+    }
+    to {
+        top: var(--animation-y-last);
+    }
+}
+
+@keyframes moveLeft-Right {
+    from {
+        transform: translateX(var(--animation-x-start));
+    }
+    to {
+        transform: translateX(var(--animation-x-last));
+    }
+}
+
+@keyframes animation-sub-background {
+    from {
+        opacity: 0.2;
+        width: var(--animation-width-start);
+    }
+    to {
+        opacity: 1;
+        width: var(--animation-width-last);
+    }
+}
+
+@keyframes moveLeftRightLoop {
+    from {
+        left: 0;
+    }
+    to {
+        left: 4px;
+    }
+}
+
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
 }

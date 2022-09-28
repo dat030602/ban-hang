@@ -16,7 +16,7 @@ function AboutShop() {
                             className={cx('description-img', 'grid__column-2', 'height-img-2-3')}
                             style={{
                                 backgroundImage:
-                                    "url('https://dosi-in.com/file/detailed/392/dosiin-mende-mende-logo-vshirt-trangao-so-mi-nam-tay-ngan-392745392745.jpg?w=1000&h=1000&fit=fill&fm=webp')",
+                                    "url('https://firebasestorage.googleapis.com/v0/b/ban-hang-a8c40.appspot.com/o/img%2Fswe-buom-mymo%2F1-8.jpeg?alt=media&token=1fe3954e-4ed6-4a7c-b637-da9e8499ca76')",
                             }}
                         ></div>
                         <div className={cx('description-content', 'grid__column-2-3')}>

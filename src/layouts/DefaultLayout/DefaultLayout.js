@@ -1,12 +1,15 @@
-import Body from "../components/Body";
-import Footer from "../components/Footer";
-import Header from "../components/Header"
-function DefaultLayout({ children }) {
-	return <div>
-        <Header />
-        <Body />
-        <Footer/>
-    </div>;
-}
+import Header from '~/layouts/components/Header';
+import Footer from '~/layouts/components/Footer';
+// import Sidebar from './Sidebar';
 
+
+function DefaultLayout({ children }) {
+    return (
+        <>
+            <Header />
+            {children}
+            <Footer />
+        </>
+    );
+}
 export default DefaultLayout;

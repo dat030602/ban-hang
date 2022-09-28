@@ -14,7 +14,7 @@ function Promotion() {
                     className={cx('img', 'fix-img-half')}
                     style={{
                         backgroundImage:
-                            "url('https://media.urbanistnetwork.com/saigoneer/article-images/legacy/2Coo57Ub.jpg')",
+                            "url('https://firebasestorage.googleapis.com/v0/b/ban-hang-a8c40.appspot.com/o/img%2Fabout-shop%2F2-10.jpeg?alt=media&token=00c2a354-d0d7-48e5-bfbc-5c0b31d9b774')",
                     }}
                 ></div>
 
