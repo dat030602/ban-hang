@@ -22,7 +22,7 @@ function Cart() {
                 render={(attrs) => (
                     <div className={cx('cart-list')} tabIndex="-1" {...attrs}>
                         {/* <!-- cart--have-cart : Có đồ trong giỏ hàng không --> */}
-                        <ul className={cx('cart-list-item cart--have-cart')}>
+                        <ul className={cx('cart-list-item','cart--have-cart')}>
                             <li className={cx('cart-item')}>
                                 <Button href="#" className={cx('cart-logo')}>
                                     <Image

@@ -1,4 +1,4 @@
-import React, { forwardRef, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import styles from './Product.module.scss';
 import GlobalStyles from '~/components/GlobalStyles/GlobalStyles.module.scss';
@@ -11,31 +11,15 @@ import Star from '~/components/Star';
 import images from '~/assets/img';
 import Image from '~/components/Image';
 import Input from '~/components/Input';
+import ZoomImage from './ZoomImage';
 
 const cx = classNames.bind(styles);
 const gx = classNames.bind(GlobalStyles);
 
 function Product({ children }) {
     const [amountChange, setAmountChange] = useState(1);
-
-    const [selectColor, setSelectColor] = useState([]);
-    const [selectColorHis, setSelectColorHis] = useState([]);
-    const [selectSize, setSelectSize] = useState([]);
-    const [selectSizeHis, setSelectSizeHis] = useState([]);
-
-    const addUseStateColor = (el) => {
-        // console.log(Array.isArray(selectColorHis) ? selectColorHis.includes(el) : false)
-        // if (!(Array.isArray(selectColorHis) ? selectColorHis.includes(el) : false)) {
-        //     setSelectColorHis(selectColorHis.push(el));
-        //     setSelectColor(selectColor.push(false));
-        //     console.log(selectColor, selectColorHis)
-        // }
-    };
-
-    const addUseStateSize = () => {
-
-        // setSelectSize(selectSize.push(false));
-    };
+    const [zoomClick, setZoomClick] = useState('close');
+    const [srcImage, setSrcImage] = useState('');
 
     var posCurrentListImg = 0;
     const section = [
@@ -68,6 +52,7 @@ function Product({ children }) {
             src: 'https://firebasestorage.googleapis.com/v0/b/ban-hang-a8c40.appspot.com/o/img%2Fbobui-drunk%2F1-17.jpeg?alt=media&token=60689573-7bb5-4551-9d09-a7bd270e7530',
         },
     ];
+
     const lengthImages = 7;
     const totalClickSubImage = lengthImages / 5 + 1;
     var countClickSubImage = 0;
@@ -76,11 +61,91 @@ function Product({ children }) {
     var percentImgStart = 0;
     var indexSave = 0;
 
+    //Size, color
+    const [color, setColor] = useState([]);
+    const [size, setSize] = useState([]);
+
+    const handleOnClickColor = (el) => {
+        if (!color.includes(el.target)) {
+            setColor(color.concat([el.target]));
+        }
+        // eslint-disable-next-line array-callback-return
+        color.map((value, index) => {
+            value.classList.remove(cx('active--clothes'));
+        });
+
+        el.target.classList.add(cx('active--clothes'));
+    };
+
+    const handleOnClickSize = (el) => {
+        if (!size.includes(el.target)) {
+            setSize(size.concat([el.target]));
+        }
+        // eslint-disable-next-line array-callback-return
+        size.map((value, index) => {
+            value.classList.remove(cx('active--clothes'));
+        });
+
+        el.target.classList.add(cx('active--clothes'));
+    };
+
+    const clearSelectStyles = () => {
+        // eslint-disable-next-line array-callback-return
+        size.map((value, index) => {
+            value.classList.remove(cx('active--clothes'));
+        });
+
+        // eslint-disable-next-line array-callback-return
+        color.map((value, index) => {
+            value.classList.remove(cx('active--clothes'));
+        });
+    };
+
+    //Description, Additional information, Review
+
+    const refIntroduction = useRef([]);
+
+    const handleOnClickTitleIntroduction = (index, el) => {
+        var scrollHeightDescriptions = [
+            refIntroduction.current[0].scrollHeight,
+            refIntroduction.current[1].scrollHeight,
+            refIntroduction.current[2].scrollHeight,
+        ];
+        if (refIntroduction.current[index].className === cx('info-title', 'close')) {
+            // eslint-disable-next-line array-callback-return
+            refIntroduction.current.map((value, indexSub) => {
+                refIntroduction.current[indexSub].classList.remove(cx('open'));
+                refIntroduction.current[indexSub].classList.add(cx('close'));
+            });
+            refIntroduction.current[index].classList.remove(cx('close'));
+            refIntroduction.current[index].classList.add(cx('open'));
+            refIntroduction.current[index].style.maxHeight = scrollHeightDescriptions[index] + 'px';
+        } else {
+            if (
+                el.target.className === cx('info-body-heading') ||
+                el.target.className === cx('info-body-heading-label')
+            ) {
+                refIntroduction.current[index].style.maxHeight = '52px';
+                refIntroduction.current[index].classList.remove(cx('open'));
+                refIntroduction.current[index].classList.add(cx('close'));
+            }
+        }
+    };
+    // eslint-disable-next-line no-const-assign
+    refIntroduction.current = [];
+    const pushRefIntroduction = (el) => {
+        if (el && !refIntroduction.current.includes(el)) {
+            refIntroduction.current.push(el);
+        }
+    };
+
+    //Image
     const refSubImages = useRef();
     const refImageSub = useRef();
     const refSubImage = useRef([]);
     const refLargeImage = useRef([]);
     const refLargeImg = useRef([]);
+    const refImageShow = useRef([]);
 
     // eslint-disable-next-line no-const-assign
     refSubImage.current = [];
@@ -88,6 +153,15 @@ function Product({ children }) {
     refLargeImage.current = [];
     // eslint-disable-next-line no-const-assign
     refLargeImg.current = [];
+    // eslint-disable-next-line no-const-assign
+    refImageShow.current = [];
+
+    const pushRefImageShow = (el) => {
+        console.log(el);
+        if (el && !refImageShow.current.includes(el)) {
+            refImageShow.current.push(el);
+        }
+    };
 
     const pushRefLargeImage = (el) => {
         if (el && !refLargeImage.current.includes(el)) {
@@ -98,6 +172,7 @@ function Product({ children }) {
     const pushRefSubImage = (el) => {
         if (el && !refSubImage.current.includes(el)) {
             refSubImage.current.push(el);
+            refSubImage.current[0].classList.add(cx('info-main-image-sub-item--active'));
         }
     };
 
@@ -125,13 +200,14 @@ function Product({ children }) {
     };
     useEffect(() => {
         //Large Image
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         percentImg = 0;
         // eslint-disable-next-line array-callback-return
         refLargeImage.current.map((value, index) => {
             refLargeImage.current[index].style.left = percentImg + '%';
             percentImg += 100;
         });
-    });
+    }, []);
     const handleClickLeftLargeImage = () => {
         if (percentImgStart < 0) {
             percentImgStart += 100;
@@ -266,6 +342,30 @@ function Product({ children }) {
         }
     };
 
+    //Hover zoom
+    var scaleZoom = 3;
+    var clientX = 0,
+        clientY = 0,
+        mWidth = 0,
+        mHeight = 0;
+    // var mulNumverY = (2 ** (scaleZoom) + 2) * 10 180
+    const handleOnMouseMove = (event, index) => {
+        var imgZoom = document.querySelectorAll('.' + cx('info-main-image-show'));
+        clientX = event.clientX - refLargeImage.current[index].offsetLeft;
+        clientY = event.clientY - refLargeImage.current[index].offsetTop;
+
+        mWidth = refLargeImage.current[index].offsetWidth;
+        mHeight = refLargeImage.current[index].offsetHeight;
+
+        clientX = -(clientX / mWidth - 0.6) * 180;
+        clientY = -(clientY / mHeight - 0.8) * 210;
+        imgZoom[index].style.transform = 'translate(' + clientX + '%,' + clientY + '%) scale(' + scaleZoom + ')';
+    };
+    const handleOnMouseLeave = (index) => {
+        var imgZoom = document.querySelectorAll('.' + cx('info-main-image-show'));
+        imgZoom[index].style.transform = 'none';
+    };
+
     return (
         <div className={cx('distance')}>
             <div className={gx('grid')}>
@@ -301,15 +401,33 @@ function Product({ children }) {
                                                         key={key}
                                                         className={cx('info-main-image-large')}
                                                         ref={pushRefLargeImage}
+                                                        onClick={() => {
+
+                                                            setZoomClick('open');
+                                                            setSrcImage(src);
+                                                        }}
                                                     >
                                                         <Image
+                                                            key={key}
                                                             className={cx('info-main-image-show')}
                                                             src={src}
                                                             alt=""
+                                                            ref={pushRefImageShow}
+                                                            onMouseMove={(event) => handleOnMouseMove(event, key - 1)}
+                                                            onMouseLeave={() => handleOnMouseLeave(key - 1)}
                                                         />
                                                     </div>
                                                 );
                                             })}
+                                            <ZoomImage
+                                                className={zoomClick}
+                                                src={srcImage}
+                                                alt=""
+                                                onchange={() => {
+                                                    setZoomClick('close');
+                                                    setSrcImage('');
+                                                }}
+                                            />
                                             <Button
                                                 className={cx('info-main-image-btn-slide-left')}
                                                 onClick={handleClickLeftLargeImage}
@@ -329,10 +447,7 @@ function Product({ children }) {
                                                     return (
                                                         <div
                                                             key={key}
-                                                            className={cx(
-                                                                'info-main-image-sub-item',
-                                                                // 'info-main-image-sub-item--active',
-                                                            )}
+                                                            className={cx('info-main-image-sub-item')}
                                                             ref={pushRefSubImage}
                                                         >
                                                             <Image
@@ -412,31 +527,29 @@ function Product({ children }) {
                                                         <Text className={cx('info-main-color-current')}></Text>
                                                     </div>
                                                     <div className={cx('info-main-size-clear')}>
-                                                        <Button className={cx('btn-clear')}>CLEAR</Button>
+                                                        <Button className={cx('btn-clear')} onClick={clearSelectStyles}>
+                                                            CLEAR
+                                                        </Button>
                                                     </div>
                                                 </div>
                                                 <div className={cx('info-main-type-list')}>
                                                     <ul className={cx('info-main-type-items')}>
                                                         <Button
                                                             className={cx('btn-32', 'info-main-color-item')}
-                                                            styleClothes
-                                                            onClick={addUseStateColor}
+                                                            onClick={handleOnClickColor}
                                                         ></Button>
                                                         <Button
                                                             className={cx('btn-32', 'info-main-color-item')}
-                                                            styleClothes
-                                                            onClick={addUseStateColor}
-                                                            ></Button>
+                                                            onClick={handleOnClickColor}
+                                                        ></Button>
                                                         <Button
                                                             className={cx('btn-32', 'info-main-color-item')}
-                                                            styleClothes
-                                                            onClick={addUseStateColor}
-                                                            ></Button>
+                                                            onClick={handleOnClickColor}
+                                                        ></Button>
                                                         <Button
                                                             className={cx('btn-32', 'info-main-color-item')}
-                                                            styleClothes
-                                                            onClick={addUseStateColor}
-                                                            ></Button>
+                                                            onClick={handleOnClickColor}
+                                                        ></Button>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -452,24 +565,28 @@ function Product({ children }) {
                                                         <Button
                                                             className={cx('btn-32', 'info-main-size-item')}
                                                             styleClothes
+                                                            onClick={handleOnClickSize}
                                                         >
                                                             S
                                                         </Button>
                                                         <Button
                                                             className={cx('btn-32', 'info-main-size-item')}
                                                             styleClothes
+                                                            onClick={handleOnClickSize}
                                                         >
                                                             M
                                                         </Button>
                                                         <Button
                                                             className={cx('btn-32', 'info-main-size-item')}
                                                             styleClothes
+                                                            onClick={handleOnClickSize}
                                                         >
                                                             L
                                                         </Button>
                                                         <Button
                                                             className={cx('btn-32', 'info-main-size-item')}
                                                             styleClothes
+                                                            onClick={handleOnClickSize}
                                                         >
                                                             XL
                                                         </Button>
@@ -512,7 +629,11 @@ function Product({ children }) {
                             </div>
                         </div>
                         <div className={cx('info-body', 'distance-32')}>
-                            <div className={cx('info-title', 'close')}>
+                            <div
+                                className={cx('info-title', 'close')}
+                                onClick={(el) => handleOnClickTitleIntroduction(0, el)}
+                                ref={pushRefIntroduction}
+                            >
                                 <div className={cx('info-body-heading')}>
                                     <i className="info-body-heading-icon fas fa-chevron-up"></i>
                                     <div className={cx('info-body-heading-label')}>Description</div>
@@ -529,25 +650,35 @@ function Product({ children }) {
                                     <Text>👉 Form chuẩn Local Brand</Text>
                                 </div>
                             </div>
-                            <div className={cx('info-title', 'close')}>
+                            <div
+                                className={cx('info-title', 'close')}
+                                onClick={(el) => handleOnClickTitleIntroduction(1, el)}
+                                ref={pushRefIntroduction}
+                            >
                                 <div className={cx('info-body-heading')}>
                                     <i className="info-body-heading-icon fas fa-chevron-up"></i>
                                     <div className={cx('info-body-heading-label')}>Additional information</div>
                                 </div>
                                 <div className={cx('info-description-body')}>
                                     <table className={cx('info-description-table')}>
-                                        <tr className={cx('info-description-item')}>
-                                            <th>MÀU</th>
-                                            <td>Hồng, Xanh Da Trời</td>
-                                        </tr>
-                                        <tr className={cx('info-description-item')}>
-                                            <th>SIZE</th>
-                                            <td>S, M, L, XL</td>
-                                        </tr>
+                                        <tbody>
+                                            <tr className={cx('info-description-item')}>
+                                                <th>MÀU</th>
+                                                <td>Hồng, Xanh Da Trời</td>
+                                            </tr>
+                                            <tr className={cx('info-description-item')}>
+                                                <th>SIZE</th>
+                                                <td>S, M, L, XL</td>
+                                            </tr>
+                                        </tbody>
                                     </table>
                                 </div>
                             </div>
-                            <div className={cx('info-title', 'close')}>
+                            <div
+                                className={cx('info-title', 'close')}
+                                onClick={(el) => handleOnClickTitleIntroduction(2, el)}
+                                ref={pushRefIntroduction}
+                            >
                                 <div className={cx('info-body-heading')}>
                                     <i className="info-body-heading-icon fas fa-chevron-up"></i>
                                     <div className={cx('info-body-heading-label')}>Review</div>

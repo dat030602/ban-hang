@@ -1,4 +1,5 @@
 @import '../../../components/GlobalStyles/GlobalStyles.module.scss';
+@import '../../../components/Button/Button.module.scss';
 
 .info-main-images {
     width: 100%;
@@ -91,12 +92,10 @@
     transition: all linear 0.3s;
     margin-right: 16px;
     opacity: 0.5;
+    &.info-main-image-sub-item--active {
+        opacity: 1;
+    }
 }
-
-.info-main-image-sub-item--active {
-    opacity: 1;
-}
-
 .info-main-image-sub-item:hover .info-main-image-sub-item-img {
     transform: translateY(-2px);
 }
@@ -276,7 +275,15 @@
     cursor: pointer;
     font-size: 1.4rem;
     border: none;
+    padding: 4px 8px;
     background-color: var(--white-color);
+    transition: all 0.1s ease;
+
+    &:hover {
+        background-color: var(--primary-color);
+        color: var(--white-color);
+        border-radius: 5px;
+    }
 }
 
 .info-main-color-item:first-child {
@@ -294,13 +301,13 @@
 .info-main-color-item,
 .info-main-size-item {
     cursor: pointer;
-    &:hover{
-        border: 2px solid var(--black-color) !important;
+    &:hover {
+        border: 2px solid var(--primary-color) !important;
     }
 }
 
-.info-main-color-item+.info-main-color-item,
-.info-main-size-item+.info-main-size-item {
+.info-main-color-item + .info-main-color-item,
+.info-main-size-item + .info-main-size-item {
     margin-left: 8px;
 }
 
@@ -401,7 +408,7 @@
 }
 
 .info-title.close {
-    max-height: 52px;
+    max-height: 52px !important;
 }
 
 .info-body-heading {
@@ -567,7 +574,6 @@
     transition: background-position-y linear 0.43s;
 }
 
-
 .product-info {
     width: 100%;
     display: flex;
@@ -623,7 +629,6 @@
     border-width: 1px 0;
     outline: none;
 }
-
 
 /* Add Comment */
 
@@ -699,7 +704,6 @@
 .info-review-add-submit-btn:hover {
     background-color: #348ab2;
 }
-
 
 /* Related Products */
 

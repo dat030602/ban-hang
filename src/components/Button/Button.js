@@ -9,11 +9,9 @@ function Button({
     to,
     href,
     disable = false,
-    focus = false,
     styleClothes = false,
     children,
     className,
-    onClick,
     ...passProps
 }) {
     let Comp = 'button';
@@ -23,22 +21,6 @@ function Button({
     const props = {
         ...passProps,
     };
-    var handleClick;
-    if (!onClick) {
-        handleClick = () => {
-            if (styleClothes) {
-                if (focus === false) {
-                    focus = true;
-                    ref.current.style.border = '2px solid var(--black-color)';
-                } else {
-                    focus = false;
-                    ref.current.style.border = '1px solid #ccc';
-                }
-            }
-        };
-    } else {
-        handleClick = onClick;
-    }
 
     if (disable) {
         Object.keys(props).forEach((key) => {
@@ -62,7 +44,7 @@ function Button({
     });
 
     return (
-        <Comp ref={ref} className={classes} onClick={handleClick} {...props}>
+        <Comp ref={ref} className={classes} {...props}>
             {children}
         </Comp>
     );

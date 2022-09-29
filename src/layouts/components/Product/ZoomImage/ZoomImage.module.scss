@@ -1,0 +1,81 @@
+.zoom-img {
+    cursor: zoom-out;
+    position: fixed;
+    z-index: 99;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    width: 100vw;
+    overflow: auto;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.close{
+    display: none;
+}
+
+.open{
+    display: flex;
+}
+
+.zoom-img__content {
+    display: block;
+    max-width: calc(100% - 20px);
+    max-height: calc(100% - 20px);
+}
+
+.content {
+    height: 90%;
+    max-width: 100%;
+}
+
+@-webkit-keyframes zoom {
+    from {
+        -webkit-transform: scale(1);
+    }
+    to {
+        -webkit-transform: scale(2);
+    }
+}
+
+@keyframes zoom {
+    from {
+        transform: scale(0.4);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
+@-webkit-keyframes zoom-out {
+    from {
+        transform: scale(1);
+    }
+    to {
+        transform: scale(0);
+    }
+}
+
+@keyframes zoom-out {
+    from {
+        transform: scale(1);
+    }
+    to {
+        transform: scale(0);
+    }
+}
+
+.zoom-img__content {
+    -webkit-animation-name: zoom;
+    -webkit-animation-duration: 0.6s;
+    animation-name: zoom;
+    animation-duration: 0.6s;
+}
+
+.out {
+    animation-name: zoom-out;
+    animation-duration: 0.6s;
+}
