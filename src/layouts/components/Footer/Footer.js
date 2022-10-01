@@ -79,7 +79,7 @@ function Footer() {
                                             className={cx('footer__info-img', 'fix-img-half')}
                                             style={{
                                                 backgroundImage:
-                                                    "url('https://dosi-in.com/file/detailed/392/dosiin-mende-mende-logo-vshirt-trangao-so-mi-nam-tay-ngan-392745392745.jpg?w=1000&h=1000&fit=fill&fm=webp')",
+                                                    "url('https://firebasestorage.googleapis.com/v0/b/ban-hang-a8c40.appspot.com/o/img%2Ffollow-us%2Ffollow-us.png?alt=media&token=d775a0f5-f419-4c7c-8857-4e4967bea268')",
                                             }}
                                         ></div>
                                     </Button>

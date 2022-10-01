@@ -52,13 +52,66 @@ function Product({ children }) {
             src: 'https://firebasestorage.googleapis.com/v0/b/ban-hang-a8c40.appspot.com/o/img%2Fbobui-drunk%2F1-17.jpeg?alt=media&token=60689573-7bb5-4551-9d09-a7bd270e7530',
         },
     ];
+    const section1 = [
+        {
+            key: 1,
+        },
+        {
+            key: 2,
+        },
+        {
+            key: 3,
+        },
+        {
+            key: 4,
+        },
+        {
+            key: 5,
+        },
+        {
+            key: 6,
+        },
+        {
+            key: 7,
+        },
+        {
+            key: 8,
+        },
+        {
+            key: 9,
+        },
+        {
+            key: 10,
+        },
+        {
+            key: 11,
+        },
+        {
+            key: 12,
+        },
+        {
+            key: 13,
+        },
+        {
+            key: 14,
+        },
+        {
+            key: 15,
+        },
+        {
+            key: 16,
+        },
+        {
+            key: 17,
+        },
+    ];
 
     const lengthImages = 7;
     const totalClickSubImage = lengthImages / 5 + 1;
     var countClickSubImage = 0;
 
     var percentImg = 0;
-    var percentImgStart = 0;
+    const [percentImgStart, setPercentImgStart] = useState(0);
     var indexSave = 0;
 
     //Size, color
@@ -157,7 +210,6 @@ function Product({ children }) {
     refImageShow.current = [];
 
     const pushRefImageShow = (el) => {
-        console.log(el);
         if (el && !refImageShow.current.includes(el)) {
             refImageShow.current.push(el);
         }
@@ -172,7 +224,6 @@ function Product({ children }) {
     const pushRefSubImage = (el) => {
         if (el && !refSubImage.current.includes(el)) {
             refSubImage.current.push(el);
-            refSubImage.current[0].classList.add(cx('info-main-image-sub-item--active'));
         }
     };
 
@@ -210,7 +261,7 @@ function Product({ children }) {
     }, []);
     const handleClickLeftLargeImage = () => {
         if (percentImgStart < 0) {
-            percentImgStart += 100;
+            setPercentImgStart(percentImgStart + 100);
             percentImg = percentImgStart;
             // eslint-disable-next-line array-callback-return
             refLargeImage.current.map((value, index) => {
@@ -240,7 +291,8 @@ function Product({ children }) {
                 percentImg += 100;
             });
         } else {
-            percentImgStart = -(lengthImages - 1) * 100;
+            setPercentImgStart(percentImgStart - (lengthImages - 1) * 100);
+            // percentImgStart = -(lengthImages - 1) * 100;
             percentImg = percentImgStart;
             // eslint-disable-next-line array-callback-return
             refLargeImage.current.map((value, index) => {
@@ -262,14 +314,16 @@ function Product({ children }) {
     };
     const handleClickRightLargeImage = () => {
         if (percentImgStart > -((lengthImages - 1) * 100)) {
-            percentImgStart -= 100;
+            setPercentImgStart(percentImgStart - 100);
+            // percentImgStart -= 100;
             percentImg = percentImgStart;
             // eslint-disable-next-line array-callback-return
             refLargeImage.current.map((value, index) => {
                 refLargeImage.current[index].style.left = percentImg + '%';
                 if (percentImg === 0) {
-                    if (index - 1 >= 0)
+                    if (index - 1 >= 0) {
                         refSubImage.current[index - 1].classList.remove(cx('info-main-image-sub-item--active'));
+                    }
                     refSubImage.current[index].classList.add(cx('info-main-image-sub-item--active'));
                     if (refSubImages.current.clientWidth > refImageSub.current.clientWidth) {
                         if (index > 0) {
@@ -291,8 +345,9 @@ function Product({ children }) {
                 percentImg += 100;
             });
         } else {
-            percentImgStart = 0;
-            percentImg = 0;
+            // percentImgStart = 0
+            setPercentImgStart(0);
+            percentImg = percentImgStart;
 
             // eslint-disable-next-line array-callback-return
             refLargeImage.current.map((value, index) => {
@@ -310,8 +365,8 @@ function Product({ children }) {
     // Sub Image
     const handleClickSubImage = (index) => {
         // el.target.classList.add(cx('info-main-image-sub-item--active'))
-
-        percentImgStart = -index * 100;
+        setPercentImgStart(-index * 100);
+        // percentImgStart = -index * 100;
         percentImg = percentImgStart;
         // eslint-disable-next-line array-callback-return
         refLargeImage.current.map((value, index1) => {
@@ -344,13 +399,13 @@ function Product({ children }) {
 
     //Hover zoom
     var scaleZoom = 3;
-    var clientX = 0,
-        clientY = 0,
-        mWidth = 0,
-        mHeight = 0;
     // var mulNumverY = (2 ** (scaleZoom) + 2) * 10 180
     const handleOnMouseMove = (event, index) => {
         var imgZoom = document.querySelectorAll('.' + cx('info-main-image-show'));
+        var clientX = 0,
+            clientY = 0,
+            mWidth = 0,
+            mHeight = 0;
         clientX = event.clientX - refLargeImage.current[index].offsetLeft;
         clientY = event.clientY - refLargeImage.current[index].offsetTop;
 
@@ -364,6 +419,45 @@ function Product({ children }) {
     const handleOnMouseLeave = (index) => {
         var imgZoom = document.querySelectorAll('.' + cx('info-main-image-show'));
         imgZoom[index].style.transform = 'none';
+    };
+
+    // Related Products
+    const refRelatedSmall = useRef();
+    const refLengthRelated = useRef([]);
+
+    // eslint-disable-next-line no-const-assign
+    refLengthRelated.current = [];
+
+    const [countPosIn, setCountPosIn] = useState(0);
+    const [countPosDe, setCountPosDe] = useState(-1);
+
+    const pushRefLengthRelated = (el) => {
+        if (el && !refLengthRelated.current.includes(el)) {
+            refLengthRelated.current.push(el);
+        }
+    };
+
+    const handleClickRelatedLeft = () => {
+        if (countPosIn > 0 && countPosDe >= 0) {
+            refRelatedSmall.current.style.transform =
+                'translateX(-' + refRelatedSmall.current.clientWidth * countPosDe + 'px)';
+            setCountPosIn(countPosIn - 1);
+            setCountPosDe(countPosDe - 1);
+        }
+    };
+
+    const handleClickRelatedRight = () => {
+        var widthRelated = document.querySelector('.' + cx('related-products-item')).clientWidth;
+        var allRelated = widthRelated * refLengthRelated.current.length;
+        var width_1_related = allRelated / refRelatedSmall.current.clientWidth;
+        width_1_related = width_1_related.toFixed(0);
+
+        if (countPosIn < width_1_related - 1) {
+            setCountPosIn(countPosIn + 1);
+            setCountPosDe(countPosDe + 1);
+            refRelatedSmall.current.style.transform =
+                'translateX(-' + refRelatedSmall.current.clientWidth * countPosIn + 'px)';
+        }
     };
 
     return (
@@ -402,7 +496,6 @@ function Product({ children }) {
                                                         className={cx('info-main-image-large')}
                                                         ref={pushRefLargeImage}
                                                         onClick={() => {
-
                                                             setZoomClick('open');
                                                             setSrcImage(src);
                                                         }}
@@ -423,7 +516,7 @@ function Product({ children }) {
                                                 className={zoomClick}
                                                 src={srcImage}
                                                 alt=""
-                                                onchange={() => {
+                                                onChange={() => {
                                                     setZoomClick('close');
                                                     setSrcImage('');
                                                 }}
@@ -443,13 +536,16 @@ function Product({ children }) {
                                         </div>
                                         <div className={cx('info-main-image-sub')} ref={refImageSub}>
                                             <div className={cx('info-main-image-sub-list')} ref={refSubImages}>
-                                                {section.map(({ key, src }, index) => {
+                                                {section.map(({ key, src }, index, class123) => {
+                                                    // eslint-disable-next-line eqeqeq
+                                                    if (index == 0)
+                                                        class123 = cx(
+                                                            'info-main-image-sub-item',
+                                                            'info-main-image-sub-item--active',
+                                                        );
+                                                    else class123 = cx('info-main-image-sub-item');
                                                     return (
-                                                        <div
-                                                            key={key}
-                                                            className={cx('info-main-image-sub-item')}
-                                                            ref={pushRefSubImage}
-                                                        >
+                                                        <div key={key} className={class123} ref={pushRefSubImage}>
                                                             <Image
                                                                 key={key}
                                                                 className={cx('info-main-image-sub-item-img')}
@@ -816,7 +912,7 @@ function Product({ children }) {
                         <h5 className={cx('related-products-title')}>RELATED PRODUCTS</h5>
                         <div className={cx('related-products-show')}>
                             <div className={cx('related-products-list')}>
-                                <div className={cx('related-products-list-cover')}>
+                                <div className={cx('related-products-list-cover')} ref={refRelatedSmall}>
                                     <div
                                         className={cx(
                                             'related-products-list-cover-sub',
@@ -824,413 +920,59 @@ function Product({ children }) {
                                             'grid_min_full_width',
                                         )}
                                     >
-                                        <div className={cx('related-products-item', 'grid__column-4')}>
-                                            <div className={cx('related-product')}>
-                                                <Button href="#" className={cx('related-product-link')}>
+                                        {
+                                            // eslint-disable-next-line array-callback-return
+                                            section1.map(({ key }) => {
+                                                return (
                                                     <div
-                                                        className={cx('product-item-img', 'fix-img-75')}
-                                                        style={{
-                                                            backgroundImage:
-                                                                "url('https://dosi-in.com/file/detailed/392/dosiin-mende-mende-logo-vshirt-trangao-so-mi-nam-tay-ngan-392745392745.jpg?w=1000&h=1000&fit=fill&fm=webp')",
-                                                        }}
-                                                    ></div>
-                                                    <div className={cx('product-info')}>
-                                                        <h5 className={cx('product-title')}>
-                                                            Áo Thun BOBUI CHỮ ANGEL Mymo
-                                                        </h5>
-                                                        <Star amount={3} />
-                                                        <div className={cx('product-price-wrap')}>
-                                                            <Text className={cx('product-price')}>100.000</Text>
-                                                            <Text className={cx('product-price-currency', 'no-space')}>
-                                                                đ
-                                                            </Text>
+                                                        key={key}
+                                                        className={cx('related-products-item', 'grid__column-4')}
+                                                        ref={pushRefLengthRelated}
+                                                    >
+                                                        <div className={cx('related-product')}>
+                                                            <Button href="#" className={cx('related-product-link')}>
+                                                                <div
+                                                                    className={cx('product-item-img', 'fix-img-75')}
+                                                                    style={{
+                                                                        backgroundImage:
+                                                                            "url('https://dosi-in.com/file/detailed/392/dosiin-mende-mende-logo-vshirt-trangao-so-mi-nam-tay-ngan-392745392745.jpg?w=1000&h=1000&fit=fill&fm=webp')",
+                                                                    }}
+                                                                ></div>
+                                                                <div className={cx('product-info')}>
+                                                                    <h5 className={cx('product-title')}>
+                                                                        Áo Thun BOBUI CHỮ ANGEL Mymo
+                                                                    </h5>
+                                                                    <Star amount={3} />
+                                                                    <div className={cx('product-price-wrap')}>
+                                                                        <Text className={cx('product-price')}>
+                                                                            100.000
+                                                                        </Text>
+                                                                        <Text
+                                                                            className={cx(
+                                                                                'product-price-currency',
+                                                                                'no-space',
+                                                                            )}
+                                                                        >
+                                                                            đ
+                                                                        </Text>
+                                                                    </div>
+                                                                </div>
+                                                            </Button>
                                                         </div>
                                                     </div>
-                                                </Button>
-                                            </div>
-                                        </div>
-                                        <div className={cx('related-products-item', 'grid__column-4')}>
-                                            <div className={cx('related-product')}>
-                                                <Button href="#" className={cx('related-product-link')}>
-                                                    <div
-                                                        className={cx('product-item-img', 'fix-img-75')}
-                                                        style={{
-                                                            backgroundImage:
-                                                                "url('https://dosi-in.com/file/detailed/392/dosiin-mende-mende-logo-vshirt-trangao-so-mi-nam-tay-ngan-392745392745.jpg?w=1000&h=1000&fit=fill&fm=webp')",
-                                                        }}
-                                                    ></div>
-                                                    <div className={cx('product-info')}>
-                                                        <h5 className={cx('product-title')}>
-                                                            Áo Thun BOBUI CHỮ ANGEL Mymo
-                                                        </h5>
-                                                        <Star amount={3} />
-                                                        <div className={cx('product-price-wrap')}>
-                                                            <Text className={cx('product-price')}>100.000</Text>
-                                                            <Text className={cx('product-price-currency', 'no-space')}>
-                                                                đ
-                                                            </Text>
-                                                        </div>
-                                                    </div>
-                                                </Button>
-                                            </div>
-                                        </div>
-                                        <div className={cx('related-products-item', 'grid__column-4')}>
-                                            <div className={cx('related-product')}>
-                                                <Button href="#" className={cx('related-product-link')}>
-                                                    <div
-                                                        className={cx('product-item-img', 'fix-img-75')}
-                                                        style={{
-                                                            backgroundImage:
-                                                                "url('https://dosi-in.com/file/detailed/392/dosiin-mende-mende-logo-vshirt-trangao-so-mi-nam-tay-ngan-392745392745.jpg?w=1000&h=1000&fit=fill&fm=webp')",
-                                                        }}
-                                                    ></div>
-                                                    <div className={cx('product-info')}>
-                                                        <h5 className={cx('product-title')}>
-                                                            Áo Thun BOBUI CHỮ ANGEL Mymo
-                                                        </h5>
-                                                        <Star amount={3} />
-                                                        <div className={cx('product-price-wrap')}>
-                                                            <Text className={cx('product-price')}>100.000</Text>
-                                                            <Text className={cx('product-price-currency', 'no-space')}>
-                                                                đ
-                                                            </Text>
-                                                        </div>
-                                                    </div>
-                                                </Button>
-                                            </div>
-                                        </div>
-                                        <div className={cx('related-products-item', 'grid__column-4')}>
-                                            <div className={cx('related-product')}>
-                                                <Button href="#" className={cx('related-product-link')}>
-                                                    <div
-                                                        className={cx('product-item-img', 'fix-img-75')}
-                                                        style={{
-                                                            backgroundImage:
-                                                                "url('https://dosi-in.com/file/detailed/392/dosiin-mende-mende-logo-vshirt-trangao-so-mi-nam-tay-ngan-392745392745.jpg?w=1000&h=1000&fit=fill&fm=webp')",
-                                                        }}
-                                                    ></div>
-                                                    <div className={cx('product-info')}>
-                                                        <h5 className={cx('product-title')}>
-                                                            Áo Thun BOBUI CHỮ ANGEL Mymo
-                                                        </h5>
-                                                        <Star amount={3} />
-                                                        <div className={cx('product-price-wrap')}>
-                                                            <Text className={cx('product-price')}>100.000</Text>
-                                                            <Text className={cx('product-price-currency', 'no-space')}>
-                                                                đ
-                                                            </Text>
-                                                        </div>
-                                                    </div>
-                                                </Button>
-                                            </div>
-                                        </div>
-                                        <div className={cx('related-products-item', 'grid__column-4')}>
-                                            <div className={cx('related-product')}>
-                                                <Button href="#" className={cx('related-product-link')}>
-                                                    <div
-                                                        className={cx('product-item-img', 'fix-img-75')}
-                                                        style={{
-                                                            backgroundImage:
-                                                                "url('https://dosi-in.com/file/detailed/392/dosiin-mende-mende-logo-vshirt-trangao-so-mi-nam-tay-ngan-392745392745.jpg?w=1000&h=1000&fit=fill&fm=webp')",
-                                                        }}
-                                                    ></div>
-                                                    <div className={cx('product-info')}>
-                                                        <h5 className={cx('product-title')}>
-                                                            Áo Thun BOBUI CHỮ ANGEL Mymo
-                                                        </h5>
-                                                        <Star amount={3} />
-                                                        <div className={cx('product-price-wrap')}>
-                                                            <Text className={cx('product-price')}>100.000</Text>
-                                                            <Text className={cx('product-price-currency', 'no-space')}>
-                                                                đ
-                                                            </Text>
-                                                        </div>
-                                                    </div>
-                                                </Button>
-                                            </div>
-                                        </div>
-                                        <div className={cx('related-products-item', 'grid__column-4')}>
-                                            <div className={cx('related-product')}>
-                                                <Button href="#" className={cx('related-product-link')}>
-                                                    <div
-                                                        className={cx('product-item-img', 'fix-img-75')}
-                                                        style={{
-                                                            backgroundImage:
-                                                                "url('https://dosi-in.com/file/detailed/392/dosiin-mende-mende-logo-vshirt-trangao-so-mi-nam-tay-ngan-392745392745.jpg?w=1000&h=1000&fit=fill&fm=webp')",
-                                                        }}
-                                                    ></div>
-                                                    <div className={cx('product-info')}>
-                                                        <h5 className={cx('product-title')}>
-                                                            Áo Thun BOBUI CHỮ ANGEL Mymo
-                                                        </h5>
-                                                        <Star amount={3} />
-                                                        <div className={cx('product-price-wrap')}>
-                                                            <Text className={cx('product-price')}>100.000</Text>
-                                                            <Text className={cx('product-price-currency', 'no-space')}>
-                                                                đ
-                                                            </Text>
-                                                        </div>
-                                                    </div>
-                                                </Button>
-                                            </div>
-                                        </div>
-                                        <div className={cx('related-products-item', 'grid__column-4')}>
-                                            <div className={cx('related-product')}>
-                                                <Button href="#" className={cx('related-product-link')}>
-                                                    <div
-                                                        className={cx('product-item-img', 'fix-img-75')}
-                                                        style={{
-                                                            backgroundImage:
-                                                                "url('https://dosi-in.com/file/detailed/392/dosiin-mende-mende-logo-vshirt-trangao-so-mi-nam-tay-ngan-392745392745.jpg?w=1000&h=1000&fit=fill&fm=webp')",
-                                                        }}
-                                                    ></div>
-                                                    <div className={cx('product-info')}>
-                                                        <h5 className={cx('product-title')}>
-                                                            Áo Thun BOBUI CHỮ ANGEL Mymo
-                                                        </h5>
-                                                        <Star amount={3} />
-                                                        <div className={cx('product-price-wrap')}>
-                                                            <Text className={cx('product-price')}>100.000</Text>
-                                                            <Text className={cx('product-price-currency', 'no-space')}>
-                                                                đ
-                                                            </Text>
-                                                        </div>
-                                                    </div>
-                                                </Button>
-                                            </div>
-                                        </div>
-                                        <div className={cx('related-products-item', 'grid__column-4')}>
-                                            <div className={cx('related-product')}>
-                                                <Button href="#" className={cx('related-product-link')}>
-                                                    <div
-                                                        className={cx('product-item-img', 'fix-img-75')}
-                                                        style={{
-                                                            backgroundImage:
-                                                                "url('https://dosi-in.com/file/detailed/392/dosiin-mende-mende-logo-vshirt-trangao-so-mi-nam-tay-ngan-392745392745.jpg?w=1000&h=1000&fit=fill&fm=webp')",
-                                                        }}
-                                                    ></div>
-                                                    <div className={cx('product-info')}>
-                                                        <h5 className={cx('product-title')}>
-                                                            Áo Thun BOBUI CHỮ ANGEL Mymo
-                                                        </h5>
-                                                        <Star amount={3} />
-                                                        <div className={cx('product-price-wrap')}>
-                                                            <Text className={cx('product-price')}>100.000</Text>
-                                                            <Text className={cx('product-price-currency', 'no-space')}>
-                                                                đ
-                                                            </Text>
-                                                        </div>
-                                                    </div>
-                                                </Button>
-                                            </div>
-                                        </div>
-                                        <div className={cx('related-products-item', 'grid__column-4')}>
-                                            <div className={cx('related-product')}>
-                                                <Button href="#" className={cx('related-product-link')}>
-                                                    <div
-                                                        className={cx('product-item-img', 'fix-img-75')}
-                                                        style={{
-                                                            backgroundImage:
-                                                                "url('https://dosi-in.com/file/detailed/392/dosiin-mende-mende-logo-vshirt-trangao-so-mi-nam-tay-ngan-392745392745.jpg?w=1000&h=1000&fit=fill&fm=webp')",
-                                                        }}
-                                                    ></div>
-                                                    <div className={cx('product-info')}>
-                                                        <h5 className={cx('product-title')}>
-                                                            Áo Thun BOBUI CHỮ ANGEL Mymo
-                                                        </h5>
-                                                        <Star amount={3} />
-                                                        <div className={cx('product-price-wrap')}>
-                                                            <Text className={cx('product-price')}>100.000</Text>
-                                                            <Text className={cx('product-price-currency', 'no-space')}>
-                                                                đ
-                                                            </Text>
-                                                        </div>
-                                                    </div>
-                                                </Button>
-                                            </div>
-                                        </div>
-                                        <div className={cx('related-products-item', 'grid__column-4')}>
-                                            <div className={cx('related-product')}>
-                                                <Button href="#" className={cx('related-product-link')}>
-                                                    <div
-                                                        className={cx('product-item-img', 'fix-img-75')}
-                                                        style={{
-                                                            backgroundImage:
-                                                                "url('https://dosi-in.com/file/detailed/392/dosiin-mende-mende-logo-vshirt-trangao-so-mi-nam-tay-ngan-392745392745.jpg?w=1000&h=1000&fit=fill&fm=webp')",
-                                                        }}
-                                                    ></div>
-                                                    <div className={cx('product-info')}>
-                                                        <h5 className={cx('product-title')}>
-                                                            Áo Thun BOBUI CHỮ ANGEL Mymo
-                                                        </h5>
-                                                        <Star amount={3} />
-                                                        <div className={cx('product-price-wrap')}>
-                                                            <Text className={cx('product-price')}>100.000</Text>
-                                                            <Text className={cx('product-price-currency', 'no-space')}>
-                                                                đ
-                                                            </Text>
-                                                        </div>
-                                                    </div>
-                                                </Button>
-                                            </div>
-                                        </div>
-                                        <div className={cx('related-products-item', 'grid__column-4')}>
-                                            <div className={cx('related-product')}>
-                                                <Button href="#" className={cx('related-product-link')}>
-                                                    <div
-                                                        className={cx('product-item-img', 'fix-img-75')}
-                                                        style={{
-                                                            backgroundImage:
-                                                                "url('https://dosi-in.com/file/detailed/392/dosiin-mende-mende-logo-vshirt-trangao-so-mi-nam-tay-ngan-392745392745.jpg?w=1000&h=1000&fit=fill&fm=webp')",
-                                                        }}
-                                                    ></div>
-                                                    <div className={cx('product-info')}>
-                                                        <h5 className={cx('product-title')}>
-                                                            Áo Thun BOBUI CHỮ ANGEL Mymo
-                                                        </h5>
-                                                        <Star amount={3} />
-                                                        <div className={cx('product-price-wrap')}>
-                                                            <Text className={cx('product-price')}>100.000</Text>
-                                                            <Text className={cx('product-price-currency', 'no-space')}>
-                                                                đ
-                                                            </Text>
-                                                        </div>
-                                                    </div>
-                                                </Button>
-                                            </div>
-                                        </div>
-                                        <div className={cx('related-products-item', 'grid__column-4')}>
-                                            <div className={cx('related-product')}>
-                                                <Button href="#" className={cx('related-product-link')}>
-                                                    <div
-                                                        className={cx('product-item-img', 'fix-img-75')}
-                                                        style={{
-                                                            backgroundImage:
-                                                                "url('https://dosi-in.com/file/detailed/392/dosiin-mende-mende-logo-vshirt-trangao-so-mi-nam-tay-ngan-392745392745.jpg?w=1000&h=1000&fit=fill&fm=webp')",
-                                                        }}
-                                                    ></div>
-                                                    <div className={cx('product-info')}>
-                                                        <h5 className={cx('product-title')}>
-                                                            Áo Thun BOBUI CHỮ ANGEL Mymo
-                                                        </h5>
-                                                        <Star amount={3} />
-                                                        <div className={cx('product-price-wrap')}>
-                                                            <Text className={cx('product-price')}>100.000</Text>
-                                                            <Text className={cx('product-price-currency', 'no-space')}>
-                                                                đ
-                                                            </Text>
-                                                        </div>
-                                                    </div>
-                                                </Button>
-                                            </div>
-                                        </div>
-                                        <div className={cx('related-products-item', 'grid__column-4')}>
-                                            <div className={cx('related-product')}>
-                                                <Button href="#" className={cx('related-product-link')}>
-                                                    <div
-                                                        className={cx('product-item-img', 'fix-img-75')}
-                                                        style={{
-                                                            backgroundImage:
-                                                                "url('https://dosi-in.com/file/detailed/392/dosiin-mende-mende-logo-vshirt-trangao-so-mi-nam-tay-ngan-392745392745.jpg?w=1000&h=1000&fit=fill&fm=webp')",
-                                                        }}
-                                                    ></div>
-                                                    <div className={cx('product-info')}>
-                                                        <h5 className={cx('product-title')}>
-                                                            Áo Thun BOBUI CHỮ ANGEL Mymo
-                                                        </h5>
-                                                        <Star amount={3} />
-                                                        <div className={cx('product-price-wrap')}>
-                                                            <Text className={cx('product-price')}>100.000</Text>
-                                                            <Text className={cx('product-price-currency', 'no-space')}>
-                                                                đ
-                                                            </Text>
-                                                        </div>
-                                                    </div>
-                                                </Button>
-                                            </div>
-                                        </div>
-                                        <div className={cx('related-products-item', 'grid__column-4')}>
-                                            <div className={cx('related-product')}>
-                                                <Button href="#" className={cx('related-product-link')}>
-                                                    <div
-                                                        className={cx('product-item-img', 'fix-img-75')}
-                                                        style={{
-                                                            backgroundImage:
-                                                                "url('https://dosi-in.com/file/detailed/392/dosiin-mende-mende-logo-vshirt-trangao-so-mi-nam-tay-ngan-392745392745.jpg?w=1000&h=1000&fit=fill&fm=webp')",
-                                                        }}
-                                                    ></div>
-                                                    <div className={cx('product-info')}>
-                                                        <h5 className={cx('product-title')}>
-                                                            Áo Thun BOBUI CHỮ ANGEL Mymo
-                                                        </h5>
-                                                        <Star amount={3} />
-                                                        <div className={cx('product-price-wrap')}>
-                                                            <Text className={cx('product-price')}>100.000</Text>
-                                                            <Text className={cx('product-price-currency', 'no-space')}>
-                                                                đ
-                                                            </Text>
-                                                        </div>
-                                                    </div>
-                                                </Button>
-                                            </div>
-                                        </div>
-                                        <div className={cx('related-products-item', 'grid__column-4')}>
-                                            <div className={cx('related-product')}>
-                                                <Button href="#" className={cx('related-product-link')}>
-                                                    <div
-                                                        className={cx('product-item-img', 'fix-img-75')}
-                                                        style={{
-                                                            backgroundImage:
-                                                                "url('https://dosi-in.com/file/detailed/392/dosiin-mende-mende-logo-vshirt-trangao-so-mi-nam-tay-ngan-392745392745.jpg?w=1000&h=1000&fit=fill&fm=webp')",
-                                                        }}
-                                                    ></div>
-                                                    <div className={cx('product-info')}>
-                                                        <h5 className={cx('product-title')}>
-                                                            Áo Thun BOBUI CHỮ ANGEL Mymo
-                                                        </h5>
-                                                        <Star amount={3} />
-                                                        <div className={cx('product-price-wrap')}>
-                                                            <Text className={cx('product-price')}>100.000</Text>
-                                                            <Text className={cx('product-price-currency', 'no-space')}>
-                                                                đ
-                                                            </Text>
-                                                        </div>
-                                                    </div>
-                                                </Button>
-                                            </div>
-                                        </div>
-                                        <div className={cx('related-products-item', 'grid__column-4')}>
-                                            <div className={cx('related-product')}>
-                                                <Button href="#" className={cx('related-product-link')}>
-                                                    <div
-                                                        className={cx('product-item-img', 'fix-img-75')}
-                                                        style={{
-                                                            backgroundImage:
-                                                                "url('https://dosi-in.com/file/detailed/392/dosiin-mende-mende-logo-vshirt-trangao-so-mi-nam-tay-ngan-392745392745.jpg?w=1000&h=1000&fit=fill&fm=webp')",
-                                                        }}
-                                                    ></div>
-                                                    <div className={cx('product-info')}>
-                                                        <h5 className={cx('product-title')}>
-                                                            Áo Thun BOBUI CHỮ ANGEL Mymo
-                                                        </h5>
-                                                        <Star amount={3} />
-                                                        <div className={cx('product-price-wrap')}>
-                                                            <Text className={cx('product-price')}>100.000</Text>
-                                                            <Text className={cx('product-price-currency', 'no-space')}>
-                                                                đ
-                                                            </Text>
-                                                        </div>
-                                                    </div>
-                                                </Button>
-                                            </div>
-                                        </div>
+                                                );
+                                            })
+                                        }
                                     </div>
                                 </div>
                             </div>
-                            <Button className={cx('related-products-btn-slide-left')}>
+                            <Button className={cx('related-products-btn-slide-left')} onClick={handleClickRelatedLeft}>
                                 <Image className={cx('arrow-btn')} src={images.leftArrow} />
                             </Button>
-                            <Button className={cx('related-products-btn-slide-right')}>
+                            <Button
+                                className={cx('related-products-btn-slide-right')}
+                                onClick={handleClickRelatedRight}
+                            >
                                 <Image className={cx('arrow-btn')} src={images.rightArrow} />
                             </Button>
                         </div>
