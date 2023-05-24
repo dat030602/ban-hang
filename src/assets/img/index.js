@@ -10,5 +10,6 @@ const images = {
     starYellow: require('~/assets/img/starYellow.svg').default,
     rightArrow: require('~/assets/img/right.svg').default,
     leftArrow: require('~/assets/img/left.svg').default,
+    bars: require('~/assets/img/bars.svg').default,
 };
 export default images;

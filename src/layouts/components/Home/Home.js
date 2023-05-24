@@ -1,7 +1,6 @@
 import React from 'react';
 
 import styles from './Home.module.scss';
-import GlobalStyles from '~/components/GlobalStyles/GlobalStyles.module.scss';
 
 import classNames from 'classnames/bind';
 
@@ -12,12 +11,11 @@ import Promotion from './Promotion';
 import Sell from './Sell';
 
 const cx = classNames.bind(styles);
-const gx = classNames.bind(GlobalStyles);
 
 function Home({ children }) {
     return (
         <div className={cx('distance')}>
-            <div className={gx('grid')}>
+            <div className={cx('grid')}>
                 <Sale />
                 <FeatureProducts />
                 <AboutShop />

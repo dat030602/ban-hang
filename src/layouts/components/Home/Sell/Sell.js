@@ -15,7 +15,7 @@ function Sell() {
                 <div className={cx('items')}>
                     <div className={cx('grid__row')}>
                         <div className={cx('grid__column-3', 'distance-24')}>
-                            <Button className={cx('item')} href="#">
+                            <Button className={cx('item')} to="/product">
                                 <div className={cx('item-heading')}>
                                     <h3 className={cx('item-heading-title')}>BOBUI BÓNG BAY</h3>
                                     <h5 className={cx('item-heading-type-product')}>Sản Phẩm Trending</h5>
@@ -49,7 +49,7 @@ function Sell() {
                             </Button>
                         </div>
                         <div className={cx('grid__column-3', 'distance-24')}>
-                            <Button className={cx('item')} href="#">
+                            <Button className={cx('item')} to="/product">
                                 <div className={cx('item-heading')}>
                                     <h3 className={cx('item-heading-title')}>BOBUI BÓNG BAY</h3>
                                     <h5 className={cx('item-heading-type-product')}>Sản Phẩm Trending</h5>
@@ -86,7 +86,7 @@ function Sell() {
                             </Button>
                         </div>
                         <div className={cx('grid__column-3', 'distance-24')}>
-                            <Button className={cx('item')} href="#">
+                            <Button className={cx('item')} to="/product">
                                 <div className={cx('item-heading')}>
                                     <h3 className={cx('item-heading-title')}>BOBUI BÓNG BAY</h3>
                                     <h5 className={cx('item-heading-type-product')}>Sản Phẩm Trending</h5>

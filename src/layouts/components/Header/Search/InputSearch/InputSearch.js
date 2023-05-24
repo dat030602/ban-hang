@@ -4,7 +4,7 @@ import 'tippy.js/dist/tippy.css';
 
 import Button from '~/components/Button';
 
-import styles from './InputSearch.module.scss';
+import styles from '../Search.module.scss';
 import classNames from 'classnames/bind';
 import Input from '~/components/Input';
 import Image from '~/components/Image';
@@ -24,27 +24,27 @@ function InputSearch() {
                     <div className={cx('search-suggest')} tabIndex="-1" {...attrs}>
                         <ul className={cx('search-suggest-list')}>
                             <li className={cx('search-suggest-item')}>
-                                <Button href="#" className={cx('search-suggest-item-label')}>
+                                <Button to="/products" className={cx('search-suggest-item-label')}>
                                     Áo thun
                                 </Button>
                             </li>
                             <li className={cx('search-suggest-item')}>
-                                <Button href="#" className={cx('search-suggest-item-label')}>
+                                <Button to="/products" className={cx('search-suggest-item-label')}>
                                     Áo sơ mi
                                 </Button>
                             </li>
                             <li className={cx('search-suggest-item')}>
-                                <Button href="#" className={cx('search-suggest-item-label')}>
+                                <Button to="/products" className={cx('search-suggest-item-label')}>
                                     Áo khoác
                                 </Button>
                             </li>
                             <li className={cx('search-suggest-item')}>
-                                <Button href="#" className={cx('search-suggest-item-label')}>
+                                <Button to="/products" className={cx('search-suggest-item-label')}>
                                     Balo
                                 </Button>
                             </li>
                             <li className={cx('search-suggest-item')}>
-                                <Button href="#" className={cx('search-suggest-item-label')}>
+                                <Button to="/products" className={cx('search-suggest-item-label')}>
                                     Thẻ thông minh
                                 </Button>
                             </li>

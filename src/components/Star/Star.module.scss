@@ -4,10 +4,17 @@
     margin: 8px 0;
 }
 
-.img{
+.img {
     height: 16px;
 }
 
-.img+.img{
+.img + .img {
     margin-left: 8px;
+}
+
+.yellow {
+    color: yellow;
+}
+.white {
+    color: #ededed;
 }

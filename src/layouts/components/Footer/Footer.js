@@ -22,7 +22,7 @@ function Footer() {
                                         <div className={cx('footer__info-icon-label')}>
                                             <i className="footer__info-icon fas fa-chevron-right"></i>
                                         </div>
-                                        <Button href="#" className={cx('footer__info-label')}>
+                                        <Button to="/" className={cx('footer__info-label')}>
                                             Địa Chỉ: 135B Trần Hưng Đạo Quận 1 TP HCM
                                         </Button>
                                     </div>
@@ -30,7 +30,7 @@ function Footer() {
                                         <div className={cx('footer__info-icon-label')}>
                                             <i className="footer__info-icon fas fa-chevron-right"></i>
                                         </div>
-                                        <Button href="#" className={cx('footer__info-label')}>
+                                        <Button to="/" className={cx('footer__info-label')}>
                                             Email: ntstore.vn.@gmail.com
                                         </Button>
                                     </div>
@@ -38,7 +38,7 @@ function Footer() {
                                         <div className={cx('footer__info-icon-label')}>
                                             <i className="footer__info-icon fas fa-chevron-right"></i>
                                         </div>
-                                        <Button href="#" className={cx('footer__info-label')}>
+                                        <Button to="/" className={cx('footer__info-label')}>
                                             Lúc nào bạn cần chúng tôi đều có mặt
                                         </Button>
                                     </div>
@@ -49,22 +49,22 @@ function Footer() {
                                     <h3 className={cx('footer__info-title')}>CHÍNH SÁCH - DỊCH VỤ</h3>
                                     <div className="line-strong"></div>
                                     <div className={cx('footer__info-item')}>
-                                        <Button href="#" className={cx('footer__info-label')}>
+                                        <Button to="/" className={cx('footer__info-label')}>
                                             Chính sách bảo mật
                                         </Button>
                                     </div>
                                     <div className={cx('footer__info-item')}>
-                                        <Button href="#" className={cx('footer__info-label')}>
+                                        <Button to="/" className={cx('footer__info-label')}>
                                             Chính sách đổi - trả
                                         </Button>
                                     </div>
                                     <div className={cx('footer__info-item')}>
-                                        <Button href="#" className={cx('footer__info-label')}>
+                                        <Button to="/" className={cx('footer__info-label')}>
                                             Chính sách giao hàng
                                         </Button>
                                     </div>
                                     <div className={cx('footer__info-item')}>
-                                        <Button href="#" className={cx('footer__info-label')}>
+                                        <Button to="/" className={cx('footer__info-label')}>
                                             Liên hệ
                                         </Button>
                                     </div>
@@ -74,7 +74,7 @@ function Footer() {
                                 <div className={cx('footer__info-items')}>
                                     <h3 className={cx('footer__info-title')}>THEO DÕI CHÚNG TÔI</h3>
                                     <div className={cx('line-strong')}></div>
-                                    <Button href="#" className={cx('footer__info-logo')}>
+                                    <Button to="/" className={cx('footer__info-logo')}>
                                         <div
                                             className={cx('footer__info-img', 'fix-img-half')}
                                             style={{

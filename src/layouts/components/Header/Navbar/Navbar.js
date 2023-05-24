@@ -44,14 +44,14 @@ function Navbar() {
                         </Tippy>
                         <Tippy delay={[0, 200]} content="Follow on twitter" placement="bottom">
                             <li className={cx('contact-item')}>
-                                <Button href="#" className={cx('contact-item-link')}>
+                                <Button to="#" className={cx('contact-item-link')}>
                                     <Image className={cx('icon')} src={images.twitter} alt="" />
                                 </Button>
                             </li>
                         </Tippy>
                         <Tippy delay={[0, 200]} content="Send us an email" placement="bottom">
                             <li className={cx('contact-item')}>
-                                <Button href="#" className={cx('contact-item-link')}>
+                                <Button to="#" className={cx('contact-item-link')}>
                                     <Image className={cx('icon')} src={images.mail} alt="" />
                                 </Button>
                             </li>

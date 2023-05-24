@@ -17,7 +17,7 @@ function FeatureProducts() {
                 <div className={cx('products')}>
                     <div className={cx('grid__row', 'distance-16')}>
                         <div className={cx('grid__column-4')}>
-                            <Button href="#" className={cx('product-item')}>
+                            <Button to="/product" className={cx('product-item')}>
                                 <div
                                     className={cx('product-item-img', 'fix-img-75')}
                                     style={{
@@ -36,7 +36,7 @@ function FeatureProducts() {
                             </Button>
                         </div>
                         <div className={cx('grid__column-4')}>
-                            <Button href="#" className={cx('product-item')}>
+                            <Button to="/product" className={cx('product-item')}>
                                 <div
                                     className={cx('product-item-img', 'fix-img-75')}
                                     style={{
@@ -55,7 +55,7 @@ function FeatureProducts() {
                             </Button>
                         </div>
                         <div className={cx('grid__column-4')}>
-                            <Button href="#" className={cx('product-item')}>
+                            <Button to="/product" className={cx('product-item')}>
                                 <div
                                     className={cx('product-item-img', 'fix-img-75')}
                                     style={{
@@ -74,7 +74,7 @@ function FeatureProducts() {
                             </Button>
                         </div>
                         <div className={cx('grid__column-4')}>
-                            <Button href="#" className={cx('product-item')}>
+                            <Button to="/product" className={cx('product-item')}>
                                 <div
                                     className={cx('product-item-img', 'fix-img-75')}
                                     style={{
@@ -93,7 +93,7 @@ function FeatureProducts() {
                             </Button>
                         </div>
                         <div className={cx('grid__column-4')}>
-                            <Button href="#" className={cx('product-item')}>
+                            <Button to="/product" className={cx('product-item')}>
                                 <div
                                     className={cx('product-item-img', 'fix-img-75')}
                                     style={{
@@ -112,7 +112,7 @@ function FeatureProducts() {
                             </Button>
                         </div>
                         <div className={cx('grid__column-4')}>
-                            <Button href="#" className={cx('product-item')}>
+                            <Button to="/product" className={cx('product-item')}>
                                 <div
                                     className={cx('product-item-img', 'fix-img-75')}
                                     style={{
@@ -131,7 +131,7 @@ function FeatureProducts() {
                             </Button>
                         </div>
                         <div className={cx('grid__column-4')}>
-                            <Button href="#" className={cx('product-item')}>
+                            <Button to="/product" className={cx('product-item')}>
                                 <div
                                     className={cx('product-item-img', 'fix-img-75')}
                                     style={{
@@ -150,7 +150,7 @@ function FeatureProducts() {
                             </Button>
                         </div>
                         <div className={cx('grid__column-4')}>
-                            <Button href="#" className={cx('product-item')}>
+                            <Button to="/product" className={cx('product-item')}>
                                 <div
                                     className={cx('product-item-img', 'fix-img-75')}
                                     style={{

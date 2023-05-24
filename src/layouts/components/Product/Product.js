@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 
 import styles from './Product.module.scss';
-import GlobalStyles from '~/components/GlobalStyles/GlobalStyles.module.scss';
+import stylesZoom from './ZoomImage.module.scss';
 
 import classNames from 'classnames/bind';
 import Text from '~/components/Text';
@@ -14,7 +14,7 @@ import Input from '~/components/Input';
 import ZoomImage from './ZoomImage';
 
 const cx = classNames.bind(styles);
-const gx = classNames.bind(GlobalStyles);
+const gx = classNames.bind(stylesZoom);
 
 function Product({ children }) {
     const [amountChange, setAmountChange] = useState(1);
@@ -193,10 +193,15 @@ function Product({ children }) {
     };
 
     //Image
+    //Dãy ảnh nhỏ
     const refSubImages = useRef();
+    //Lớn
     const refImageSub = useRef();
+
     const refSubImage = useRef([]);
+
     const refLargeImage = useRef([]);
+
     const refLargeImg = useRef([]);
     const refImageShow = useRef([]);
 
@@ -230,7 +235,6 @@ function Product({ children }) {
     const pushRefLargeImg = (el) => {
         if (el && !refLargeImg.current.includes(el)) {
             refLargeImg.current.push(el);
-            console.log(1);
         }
     };
 
@@ -262,7 +266,7 @@ function Product({ children }) {
     const handleClickLeftLargeImage = () => {
         if (percentImgStart < 0) {
             setPercentImgStart(percentImgStart + 100);
-            percentImg = percentImgStart;
+            percentImg = percentImgStart + 100;
             // eslint-disable-next-line array-callback-return
             refLargeImage.current.map((value, index) => {
                 refLargeImage.current[index].style.left = percentImg + '%';
@@ -293,7 +297,7 @@ function Product({ children }) {
         } else {
             setPercentImgStart(percentImgStart - (lengthImages - 1) * 100);
             // percentImgStart = -(lengthImages - 1) * 100;
-            percentImg = percentImgStart;
+            percentImg = percentImgStart - (lengthImages - 1) * 100;
             // eslint-disable-next-line array-callback-return
             refLargeImage.current.map((value, index) => {
                 refLargeImage.current[index].style.left = percentImg + '%';
@@ -316,7 +320,7 @@ function Product({ children }) {
         if (percentImgStart > -((lengthImages - 1) * 100)) {
             setPercentImgStart(percentImgStart - 100);
             // percentImgStart -= 100;
-            percentImg = percentImgStart;
+            percentImg = percentImgStart - 100;
             // eslint-disable-next-line array-callback-return
             refLargeImage.current.map((value, index) => {
                 refLargeImage.current[index].style.left = percentImg + '%';
@@ -347,7 +351,8 @@ function Product({ children }) {
         } else {
             // percentImgStart = 0
             setPercentImgStart(0);
-            percentImg = percentImgStart;
+            percentImg = 0;
+            // percentImg = percentImgStart;
 
             // eslint-disable-next-line array-callback-return
             refLargeImage.current.map((value, index) => {
@@ -367,7 +372,7 @@ function Product({ children }) {
         // el.target.classList.add(cx('info-main-image-sub-item--active'))
         setPercentImgStart(-index * 100);
         // percentImgStart = -index * 100;
-        percentImg = percentImgStart;
+        percentImg = -index * 100;
         // eslint-disable-next-line array-callback-return
         refLargeImage.current.map((value, index1) => {
             refLargeImage.current[index1].style.left = percentImg + '%';
@@ -401,24 +406,28 @@ function Product({ children }) {
     var scaleZoom = 3;
     // var mulNumverY = (2 ** (scaleZoom) + 2) * 10 180
     const handleOnMouseMove = (event, index) => {
-        var imgZoom = document.querySelectorAll('.' + cx('info-main-image-show'));
-        var clientX = 0,
-            clientY = 0,
-            mWidth = 0,
-            mHeight = 0;
-        clientX = event.clientX - refLargeImage.current[index].offsetLeft;
-        clientY = event.clientY - refLargeImage.current[index].offsetTop;
+        if (document.body.clientWidth > 1023) {
+            var imgZoom = document.querySelectorAll('.' + cx('info-main-image-show'));
+            var clientX = 0,
+                clientY = 0,
+                mWidth = 0,
+                mHeight = 0;
+            clientX = event.clientX - refLargeImage.current[index].offsetLeft;
+            clientY = event.clientY - refLargeImage.current[index].offsetTop;
 
-        mWidth = refLargeImage.current[index].offsetWidth;
-        mHeight = refLargeImage.current[index].offsetHeight;
+            mWidth = refLargeImage.current[index].offsetWidth;
+            mHeight = refLargeImage.current[index].offsetHeight;
 
-        clientX = -(clientX / mWidth - 0.6) * 180;
-        clientY = -(clientY / mHeight - 0.8) * 210;
-        imgZoom[index].style.transform = 'translate(' + clientX + '%,' + clientY + '%) scale(' + scaleZoom + ')';
+            clientX = -(clientX / mWidth - 0.6) * 180;
+            clientY = -(clientY / mHeight - 0.8) * 210;
+            imgZoom[index].style.transform = 'translate(' + clientX + '%,' + clientY + '%) scale(' + scaleZoom + ')';
+        }
     };
     const handleOnMouseLeave = (index) => {
-        var imgZoom = document.querySelectorAll('.' + cx('info-main-image-show'));
-        imgZoom[index].style.transform = 'none';
+        if (document.body.clientWidth > 1023) {
+            var imgZoom = document.querySelectorAll('.' + cx('info-main-image-show'));
+            imgZoom[index].style.transform = 'none';
+        }
     };
 
     // Related Products
@@ -456,23 +465,23 @@ function Product({ children }) {
             setCountPosIn(countPosIn + 1);
             setCountPosDe(countPosDe + 1);
             refRelatedSmall.current.style.transform =
-                'translateX(-' + refRelatedSmall.current.clientWidth * countPosIn + 'px)';
+                'translateX(-' + refRelatedSmall.current.clientWidth * (countPosIn + 1) + 'px)';
         }
     };
 
     return (
         <div className={cx('distance')}>
-            <div className={gx('grid')}>
+            <div className={cx('grid')}>
                 <div className={cx('distance-56')}>
                     <div className={cx('products__heading')}>
                         <div className={cx('products__heading-links')}>
                             <div className={cx('products__heading-link-current')}>
-                                <Button href="#" className={cx('products__heading-link-current-item')}>
+                                <Button href="/" className={cx('products__heading-link-current-item')}>
                                     Home
                                 </Button>
                                 <Text>/</Text>
                                 <Button
-                                    href="#"
+                                    to=" "
                                     className={cx(
                                         'products__heading-link-current-item',
                                         'products__heading-link-current--active',
@@ -498,6 +507,7 @@ function Product({ children }) {
                                                         onClick={() => {
                                                             setZoomClick('open');
                                                             setSrcImage(src);
+                                                            console.log();
                                                         }}
                                                     >
                                                         <Image
@@ -516,9 +526,19 @@ function Product({ children }) {
                                                 className={zoomClick}
                                                 src={srcImage}
                                                 alt=""
-                                                onChange={() => {
-                                                    setZoomClick('close');
-                                                    setSrcImage('');
+                                                onClick={() => {
+                                                    var modalZoomClickImg = document.querySelector(
+                                                        '.' + gx('zoom-img__content'),
+                                                    );
+                                                    modalZoomClickImg.classList.add(gx('out'));
+                                                    setTimeout(function () {
+                                                        modalZoomClickImg.className = gx('zoom-img__content');
+                                                        var close = document.querySelector('.' + gx('zoom-img'));
+                                                        close.classList.remove(gx('open'));
+                                                        close.classList.add(gx('close'));
+                                                        setZoomClick('close');
+                                                        setSrcImage('');
+                                                    }, 400);
                                                 }}
                                             />
                                             <Button
@@ -930,7 +950,7 @@ function Product({ children }) {
                                                         ref={pushRefLengthRelated}
                                                     >
                                                         <div className={cx('related-product')}>
-                                                            <Button href="#" className={cx('related-product-link')}>
+                                                            <Button to="#" className={cx('related-product-link')}>
                                                                 <div
                                                                     className={cx('product-item-img', 'fix-img-75')}
                                                                     style={{
